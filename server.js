@@ -7,17 +7,42 @@ import signin from './Controllers/signin.js';
 import profile from './Controllers/profile.js';
 import entries from './Controllers/entries.js';
 import facedetection from './Controllers/facedetection.js';
-
+import {
+    SecretsManagerClient,
+    GetSecretValueCommand,
+  } from "@aws-sdk/client-secrets-manager";
 const PORT = process.env.PORT || 8080;
+  
+const secret_name = "rds!db-9f09ea54-c37b-468b-8a62-0ec73a35e159";
 
+const client = new SecretsManagerClient({
+    region: "us-east-1",
+});
+
+let result;
+
+try {
+    result = await client.send(
+        new GetSecretValueCommand({
+        SecretId: secret_name,
+        VersionStage: "AWSCURRENT", // VersionStage defaults to AWSCURRENT if unspecified
+        })
+    );
+} catch (error) {
+// For a list of exceptions thrown, see
+// https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
+throw error;
+}
+
+const secret = JSON.parse(result.SecretString);
 const db = knex({
     client: 'pg',
     connection: {
-        host : '127.0.0.1',
+        host : 'smart-brain-db.csorbh4x1eyw.us-east-1.rds.amazonaws.com',
         port : 5432,
-        user : 'postgres',
-        password : 'test',
-        database : 'smart-brain'
+        user : secret['username'],
+        password : secret['password'],
+        database : 'smart-brain-db'
     }
 });
 
