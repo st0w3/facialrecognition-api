@@ -19,12 +19,6 @@ const db = knex({
         password : 'test',
         database : 'smart-brain'
     }
-    });
-
-db.select('*')
-.from('users')
-.then(data => {
-    console.log(data);
 });
 
 const app = express();
@@ -32,7 +26,7 @@ app.use(express.json());
 app.use(cors());
 
 app.get('/', (req, res) => {
-    res.json(database.users)
+    res.json('Rock on!')
 })
 
 app.post('/signin', (req, res) => signin(req, res, db, bcrypt));
@@ -40,11 +34,6 @@ app.post('/register', (req, res) => register(req, res, db, bcrypt));
 app.get('/profile/:id', (req, res) => profile(req, res, db));
 app.put('/entries', (req, res) => entries(req, res, db));
 app.post('/facedetection', (req, res) => facedetection(req, res));
-
-function getUserById (id)
-{
-    return database.users.filter(x=>x.id === id);
-}
 
 app.listen(PORT, ()=> {
     console.log(`app is running on port ${PORT}`);
