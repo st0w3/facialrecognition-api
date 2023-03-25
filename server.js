@@ -8,6 +8,8 @@ import profile from './Controllers/profile.js';
 import entries from './Controllers/entries.js';
 import facedetection from './Controllers/facedetection.js';
 
+const PORT = 8080;
+
 const db = knex({
     client: 'pg',
     connection: {
@@ -44,16 +46,6 @@ function getUserById (id)
     return database.users.filter(x=>x.id === id);
 }
 
-
-
-// Load hash from your password DB.
-// bcrypt.compare("bacon", hash, function(err, res) {
-//     // res == true
-// });
-// bcrypt.compare("veggies", hash, function(err, res) {
-//     // res = false
-// });
-
-app.listen(3000, ()=> {
-    console.log('app is running on port 3000');
+app.listen(PORT, ()=> {
+    console.log(`app is running on port ${PORT}`);
 })
