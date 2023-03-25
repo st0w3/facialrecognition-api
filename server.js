@@ -38,11 +38,11 @@ const secret = JSON.parse(result.SecretString);
 const db = knex({
     client: 'pg',
     connection: {
-        host : 'smart-brain-db.csorbh4x1eyw.us-east-1.rds.amazonaws.com',
+        host : 'smart-brain.csorbh4x1eyw.us-east-1.rds.amazonaws.com',
         port : 5432,
         user : secret['username'],
         password : secret['password'],
-        database : 'smart-brain-db',
+        database : 'smart-brain',
         ssl: true
     }
 });
