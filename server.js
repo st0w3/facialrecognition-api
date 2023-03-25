@@ -8,7 +8,7 @@ import profile from './Controllers/profile.js';
 import entries from './Controllers/entries.js';
 import facedetection from './Controllers/facedetection.js';
 
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 
 const db = knex({
     client: 'pg',
