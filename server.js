@@ -42,7 +42,8 @@ const db = knex({
         port : 5432,
         user : secret['username'],
         password : secret['password'],
-        database : 'smart-brain'
+        database : 'smart-brain',
+        ssl: true
     }
 });
 
