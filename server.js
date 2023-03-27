@@ -11,7 +11,7 @@ import {
     SecretsManagerClient,
     GetSecretValueCommand,
   } from "@aws-sdk/client-secrets-manager";
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 80;
   
 const secret_name = "rds!db-9f09ea54-c37b-468b-8a62-0ec73a35e159";
 
