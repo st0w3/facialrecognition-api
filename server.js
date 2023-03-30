@@ -21,6 +21,8 @@ const client = new SecretsManagerClient({
 
 let result;
 
+console.log(result);
+
 try {
     result = await client.send(
         new GetSecretValueCommand({
@@ -33,7 +35,7 @@ try {
 // https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
 throw error;
 }
-
+console.log(JSON.parse(result.SecretString));
 const secret = JSON.parse(result.SecretString);
 const db = knex({
     client: 'pg',
@@ -45,6 +47,8 @@ const db = knex({
         database : 'smart-brain'
     }
 });
+
+console.log(db.connection);
 
 const app = express();
 app.use(express.json());
@@ -60,6 +64,6 @@ app.get('/profile/:id', (req, res) => profile(req, res, db));
 app.put('/entries', (req, res) => entries(req, res, db));
 app.post('/facedetection', (req, res) => facedetection(req, res));
 
-app.listen(80, ()=> {
-    console.log(`app is running on port 80`);
+app.listen(443, ()=> {
+    console.log(`app is running on port 443`);
 })
