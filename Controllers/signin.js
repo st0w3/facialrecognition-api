@@ -1,4 +1,5 @@
 export default (req, res, db, bcrypt) => {
+    console.log('entered signin');
     const {email, password} = req.body;
     db.select('email', 'hash')
     .from('login')

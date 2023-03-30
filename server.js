@@ -12,7 +12,7 @@ import {
     GetSecretValueCommand,
   } from "@aws-sdk/client-secrets-manager";
 const PORT = process.env.PORT || 80;
-  
+console.log('entered server');
 const secret_name = "rds!db-9f09ea54-c37b-468b-8a62-0ec73a35e159";
 
 const client = new SecretsManagerClient({
@@ -60,6 +60,6 @@ app.get('/profile/:id', (req, res) => profile(req, res, db));
 app.put('/entries', (req, res) => entries(req, res, db));
 app.post('/facedetection', (req, res) => facedetection(req, res));
 
-app.listen(PORT, ()=> {
-    console.log(`app is running on port ${PORT}`);
+app.listen(80, ()=> {
+    console.log(`app is running on port 80`);
 })
