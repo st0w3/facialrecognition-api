@@ -64,6 +64,6 @@ app.get('/profile/:id', (req, res) => profile(req, res, db));
 app.put('/entries', (req, res) => entries(req, res, db));
 app.post('/facedetection', (req, res) => facedetection(req, res));
 
-app.listen(443, ()=> {
-    console.log(`app is running on port 443`);
+app.listen(80, ()=> {
+    console.log(`app is running on port 80`);
 })
