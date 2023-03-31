@@ -13,7 +13,7 @@ import {
   } from "@aws-sdk/client-secrets-manager";
 const PORT = process.env.PORT || 80;
 console.log('entered server');
-const secret_name = "rds!db-9f09ea54-c37b-468b-8a62-0ec73a35e159";
+const secret_name = "rds!db-2a4478e8-b071-4a76-afeb-fd72125595ad";
 
 const client = new SecretsManagerClient({
     region: "us-east-1",
@@ -40,11 +40,11 @@ const secret = JSON.parse(result.SecretString);
 const db = knex({
     client: 'pg',
     connection: {
-        host : 'smart-brain.csorbh4x1eyw.us-east-1.rds.amazonaws.com',
+        host : 'stowe-code-smart-brain.csorbh4x1eyw.us-east-1.rds.amazonaws.com',
         port : 5432,
         user : secret['username'],
         password : secret['password'],
-        database : 'smart-brain'
+        database : 'smartbrain'
     }
 });
 
