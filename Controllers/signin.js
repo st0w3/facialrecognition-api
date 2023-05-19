@@ -1,5 +1,4 @@
 export default (req, res, db, bcrypt) => {
-    console.log('entered signin');
     const {email, password} = req.body;
     db.select('email', 'hash')
     .from('login')
@@ -11,7 +10,6 @@ export default (req, res, db, bcrypt) => {
             .from('users')
             .where('email', '=', email)
             .then(user => {
-                console.log(user);
                 res.json(user);
             })
         }
@@ -19,7 +17,7 @@ export default (req, res, db, bcrypt) => {
             res.status(400).json('Failed to signin. Check username and password.');
     })
     .catch(err => {
-        res.status(400).json('Error ocurred while signing in.');
+        res.status(400).json('Error ocurred while signing in');
     });
 }
 

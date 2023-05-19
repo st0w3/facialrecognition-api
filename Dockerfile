@@ -1,14 +1,9 @@
-# syntax=docker/dockerfile:1
+FROM node:current-alpine3.16
 
-FROM node:18
-ENV NODE_ENV=production
+WORKDIR /usr/src/smart-brain-api
 
-WORKDIR /app
+COPY ./ ./
 
-COPY ["package.json", "package-lock.json*", "./"]
+RUN npm install
 
-RUN npm install --production
-
-COPY . .
-EXPOSE 80
-CMD [ "node", "server.js" ]
+CMD ["/bin/sh"]

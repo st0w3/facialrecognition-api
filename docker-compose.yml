@@ -1,0 +1,35 @@
+version: '4.19'
+
+services:
+  smart-brain-api:
+    container_name: backend
+    # image: node:current-alpine3.16
+    build: ./
+    ports: 
+      - "8000:8000"
+    command: npm start
+    working_dir: /usr/src/smart-brain-api
+    environment:
+      POSTGRES_USER: sally
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: smart-brain-docker
+      POSTGRES_HOST: postgres
+    links:
+      - postgres
+    volumes:
+      - ./:/usr/src/smart-brain-api
+  
+  postgres:
+    environment:
+      POSTGRES_USER: sally
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: smart-brain-docker
+      POSTGRES_HOST: postgres
+    build: ./postgres
+    ports: 
+      - "5432:5432"
+
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
